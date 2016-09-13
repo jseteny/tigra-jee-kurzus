@@ -1,3 +1,9 @@
 target/
-.idea/
-*.iml
+.idea/copyright
+.idea/libraries/Maven*.*
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/vcs.xml
