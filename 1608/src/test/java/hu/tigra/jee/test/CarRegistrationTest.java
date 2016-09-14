@@ -72,7 +72,7 @@ public class CarRegistrationTest {
     }
 
     @Test
-    public void testRegister() throws Exception {
+    public void register() throws Exception {
         Car car = new Car();
         car.setOwner(lester);
         car.setFuel("gasoline");
