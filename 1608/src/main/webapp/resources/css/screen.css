@@ -58,6 +58,11 @@ body {
 #aside ul {
   padding-left: 30px;
 }
+
+#aside img {
+  width: 276px
+}
+
 .dualbrand {
   float: right;
   padding-right: 10px;
