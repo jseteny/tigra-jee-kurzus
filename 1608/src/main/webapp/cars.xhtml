@@ -6,31 +6,39 @@
     xmlns:h="http://java.sun.com/jsf/html"
     template="/WEB-INF/templates/default.xhtml">
     <ui:define name="content">
-        <h1>Member list</h1>
+        <h1>Car list</h1>
 
         <h:form id="reg">
-            <h2>Member Registration</h2>
-            <p>Enforces annotation-based constraints defined on the
-                model class.</p>
+            <h2>Car Registration</h2>
             <h:panelGrid columns="3" columnClasses="titleCell">
-                <h:outputLabel for="name" value="Name:" />
-                <h:inputText id="name" value="#{newMember.name}" />
+                <h:outputLabel for="owner" value="Owner: " />
+                <h:selectOneListbox id="owner" value="#{newCar.owner}">
+                    <f:selectItems value="#{members}"
+                                   var="m"
+                                   itemValue="#{m.id}"
+                                   itemLabel="#{m.name}"
+                    />
+                </h:selectOneListbox>
+                <h:message for="owner" errorClass="invalid" />
+
+                <h:outputLabel for="phoneNumber" value="Type:" />
+                <h:inputText id="phoneNumber"
+                             value="#{newCar.type}" />
+                <h:message for="phoneNumber" errorClass="invalid" />
+
+                <h:outputLabel for="name" value="Nuber plate:" />
+                <h:inputText id="name" value="#{newCar.licensePlateNumber}" />
                 <h:message for="name" errorClass="invalid" />
 
-                <h:outputLabel for="email" value="Email:" />
-                <h:inputText id="email" value="#{newMember.email}" />
+                <h:outputLabel for="email" value="Fuel type:" />
+                <h:inputText id="email" value="#{newCar.fuel}" />
                 <h:message for="email" errorClass="invalid" />
-
-                <h:outputLabel for="phoneNumber" value="Phone #:" />
-                <h:inputText id="phoneNumber"
-                    value="#{newMember.phoneNumber}" />
-                <h:message for="phoneNumber" errorClass="invalid" />
             </h:panelGrid>
 
             <p>
                 <h:panelGrid columns="2">
                     <h:commandButton id="register"
-                        action="#{memberController.register}"
+                        action="#{carController.register}"
                         value="Register" styleClass="register" />
                     <h:messages styleClass="messages"
                         errorClass="invalid" infoClass="valid"
