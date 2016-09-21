@@ -27,7 +27,7 @@ import java.io.Serializable;
 @Entity
 @XmlRootElement
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "license_plate_number"))
-public class Car implements Serializable {
+public class Car extends EqualsById implements Serializable {
 
     @Id
     @GeneratedValue
