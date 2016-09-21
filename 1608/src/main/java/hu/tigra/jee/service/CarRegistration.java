@@ -35,11 +35,11 @@ public class CarRegistration {
     private EntityManager em;
 
     @Inject
-    private Event<Car> memberEventSrc;
+    private Event<Car> carEventSrc;
 
     public void register(Car car) throws Exception {
         log.info("Registering " + car.getLicensePlateNumber());
         em.persist(car);
-        memberEventSrc.fire(car);
+        carEventSrc.fire(car);
     }
 }
