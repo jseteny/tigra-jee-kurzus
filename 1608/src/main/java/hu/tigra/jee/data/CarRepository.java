@@ -1,7 +1,6 @@
 package hu.tigra.jee.data;
 
 import hu.tigra.jee.model.Car;
-import hu.tigra.jee.model.Car_;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -22,9 +21,11 @@ public class CarRepository {
         CriteriaQuery<Car> criteria = cb.createQuery(Car.class);
         Root<Car> car = criteria.from(Car.class);
 
+        criteria.select(car).orderBy(cb.asc(car.get("licensePlateNumber")));
+
         // Type-safe criteria query, a new feature in JPA 2.0
         // Car_ egy generált osztály. Nem kell megírni kézzel
-        criteria.select(car).orderBy(cb.asc(car.get(Car_.licensePlateNumber)));
+        // criteria.select(car).orderBy(cb.asc(car.get(Car_.licensePlateNumber)));
 
         return em.createQuery(criteria).getResultList();
     }

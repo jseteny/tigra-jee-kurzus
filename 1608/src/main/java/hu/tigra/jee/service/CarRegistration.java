@@ -47,9 +47,4 @@ public class CarRegistration {
         log.info("Finding car with ID = " + id);
         return em.find(Car.class, id);
     }
-
-    public Car find(Long id) throws Exception {
-        log.info("Finding car with ID = " + id);
-        return em.find(Car.class, id);
-    }
 }
