@@ -45,7 +45,7 @@ public class CarController {
     private Car newCar;
 
     @PostConstruct
-    public void initNewMember() {
+    public void initNewCar() {
         newCar = new Car();
     }
 
@@ -54,7 +54,7 @@ public class CarController {
             carRegistration.register(newCar);
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
             facesContext.addMessage(null, m);
-            initNewMember();
+            initNewCar();
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
