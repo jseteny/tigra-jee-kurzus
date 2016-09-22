@@ -17,6 +17,7 @@
 package hu.tigra.jee.test;
 
 import hu.tigra.jee.model.Car;
+import hu.tigra.jee.model.EqualsById;
 import hu.tigra.jee.model.Member;
 import hu.tigra.jee.service.CarRegistration;
 import hu.tigra.jee.service.MemberRegistration;
@@ -43,7 +44,7 @@ public class CarRegistrationTest {
     @Deployment
     public static Archive<?> createTestArchive() {
         return ShrinkWrap.create(WebArchive.class, "test.war")
-                .addClasses(Car.class, CarRegistration.class, Member.class, MemberRegistration.class, Resources.class)
+                .addClasses(Car.class, CarRegistration.class, Member.class, EqualsById.class, MemberRegistration.class, Resources.class)
                 .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 // Deploy our test datasource

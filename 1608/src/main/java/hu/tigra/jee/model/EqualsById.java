@@ -1,6 +1,6 @@
 package hu.tigra.jee.model;
 
-abstract class EqualsById {
+public abstract class EqualsById {
 
     @Override
     public boolean equals(Object o) {
