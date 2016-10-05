@@ -60,7 +60,6 @@ import java.util.List;
 @Provider
 public class MessageListWriter implements MessageBodyWriter<List<Message>> {
 
-    // TODO: fix this after proxiable UriInfo is supported
     @Context
     private javax.inject.Provider<UriInfo> ui;
 
