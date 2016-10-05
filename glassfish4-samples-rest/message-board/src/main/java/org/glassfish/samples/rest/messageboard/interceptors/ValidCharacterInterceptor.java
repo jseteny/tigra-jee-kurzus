@@ -50,7 +50,6 @@ import java.io.InputStream;
  */
 public class ValidCharacterInterceptor implements ReaderInterceptor {
 
-    @Override
     public Object aroundReadFrom(ReaderInterceptorContext readerInterceptorContext) throws IOException, WebApplicationException {
         final InputStream originalInputStream = readerInterceptorContext.getInputStream();
         readerInterceptorContext.setInputStream(new InputStream() {
