@@ -56,6 +56,7 @@ import java.lang.reflect.Type;
 import java.net.URI;
 import java.util.List;
 
+// TODO: 2b honnan tudjuk, hogy ezt az osztályt betölti a WildFly (JBoss)?
 @Stateless
 @Provider
 public class MessageListWriter implements MessageBodyWriter<List<Message>> {

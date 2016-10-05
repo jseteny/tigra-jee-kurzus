@@ -61,6 +61,11 @@ public class MessageBoardResourceBean {
     @EJB
     MessageHolderSingletonBean singleton;
 
+    // TODO: 1. a lap betöltésekor miért kapjuk rögtön az alábbi hibát? (lásd TODO: 2.)
+    // TODO: 2. hogyan javítsuk ezt a hibát? ERROR [org.jboss.resteasy.resteasy_jaxrs.i18n] (default task-63) RESTEASY002005: Failed executing GET /messages: org.jboss.resteasy.core.NoMessageBodyWriterFoundFailure: Could not find MessageBodyWriter for response object of type: java.util.LinkedList of media type: text/html
+    // TODO: 3. miért működik http://localhost:8080/message-board/app/messages ?
+    // TODO: 4. miért van  app/ a fönti URL-ben?
+    // Miért nem http://localhost:8080/message-board/app/messagesIO az ami választ ad?
     @GET
     public List<Message> getMessagesIO() {
         return singleton.getMessages();
