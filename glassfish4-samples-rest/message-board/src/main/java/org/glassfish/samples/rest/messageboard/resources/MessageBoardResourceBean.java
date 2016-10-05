@@ -62,6 +62,7 @@ public class MessageBoardResourceBean {
     MessageHolderSingletonBean singleton;
 
     @GET
+    @Produces("application/json")
     public List<Message> getMessages() {
         return singleton.getMessages();
     }
