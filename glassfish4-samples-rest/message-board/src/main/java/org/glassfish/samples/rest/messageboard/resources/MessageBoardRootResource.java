@@ -51,7 +51,7 @@ public class MessageBoardRootResource {
     @EJB
     MessageBoardResourceBean r;
 
-    @Path("messages")
+    @Path("messages") // TODO 3-ra válasz: a /messages része innen jön
     public MessageBoardResourceBean getMessageBoardResourceBean() {
         return r;
     }

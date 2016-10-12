@@ -42,7 +42,7 @@ package org.glassfish.samples.rest.messageboard.entities;
 
 import java.util.Date;
 
-// TODO: 5. JPA illetve EntityManager kezeli-e ezt az osztályt?
+// TODO: 5. JPA illetve EntityManager kezeli-e ezt az osztályt? Válasz nem, mert nincs racjta @Entity annotáció
 public class Message {
 
     private Date created;

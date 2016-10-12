@@ -51,7 +51,7 @@ import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
-@ApplicationPath("/app")
+@ApplicationPath("/app") // TODO 3-ra és 4-re válasz: a /app része innen jön
 public class JaxRsApplication extends Application {
 
     @Override

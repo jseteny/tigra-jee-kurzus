@@ -66,7 +66,8 @@ public class MessageBoardResourceBean {
     // TODO: 3. miért működik http://localhost:8080/message-board/app/messages ?
     // TODO: 4. miért van  app/ a fönti URL-ben?
     // Miért nem http://localhost:8080/message-board/app/messagesIO az ami választ ad?
-    @GET
+    @GET  // TODO 3-ra válasz: ez az a GET, amelyikhez nem tartozik további PATH darab
+    @Produces("application/json") // TODO 2-re lehetséges javítás, de nem használja a MessageListWriter-t
     public List<Message> getMessagesIO() {
         return singleton.getMessages();
     }
