@@ -82,4 +82,10 @@ public class MessageBoardTest {
         String r = target.request().get(String.class);
         assertEquals("[{\"uniqueId\":3},{\"uniqueId\":2},{\"uniqueId\":1},{\"uniqueId\":0}]", r);
     }
+
+    @Test(expected = javax.ws.rs.NotFoundException.class)
+    public void test3Delete() {
+        target.path("3").request().delete();
+        target.path("3").request().get(String.class);
+    }
 }
