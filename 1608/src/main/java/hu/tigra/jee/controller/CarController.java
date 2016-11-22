@@ -61,7 +61,8 @@ public class CarController implements ValueChangeListener {
 
     public void deleteMember() {
         try {
-            memberRegistration.delete(owner);
+            Member o = newCar.getOwner();
+            memberRegistration.delete(o);
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Deleted!", "Delete successful");
             facesContext.addMessage(null, m);
             initNewCar();
