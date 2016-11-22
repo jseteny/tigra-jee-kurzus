@@ -17,13 +17,18 @@
 package hu.tigra.jee.controller;
 
 import hu.tigra.jee.model.Car;
+import hu.tigra.jee.model.Member;
 import hu.tigra.jee.service.CarRegistration;
+import hu.tigra.jee.service.MemberRegistration;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AbortProcessingException;
+import javax.faces.event.ValueChangeEvent;
+import javax.faces.event.ValueChangeListener;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -32,7 +37,7 @@ import javax.inject.Named;
 // Read more about the @Model stereotype in this FAQ:
 // http://www.cdi-spec.org/faq/#accordion6
 @Model
-public class CarController {
+public class CarController implements ValueChangeListener {
 
     @Inject
     private FacesContext facesContext;
@@ -40,13 +45,34 @@ public class CarController {
     @Inject
     private CarRegistration carRegistration;
 
+    @Inject
+    private MemberRegistration memberRegistration;
+
     @Produces
     @Named
     private Car newCar;
 
+    private Member owner;
+
     @PostConstruct
     public void initNewCar() {
         newCar = new Car();
+    }
+
+    public void deleteMember() {
+        try {
+            memberRegistration.delete(owner);
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Deleted!", "Delete successful");
+            facesContext.addMessage(null, m);
+            initNewCar();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            String errorMessage = getRootErrorMessage(e);
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Delete unsuccessful");
+            facesContext.addMessage(null, m);
+        }
     }
 
     public void register() throws Exception {
@@ -81,4 +107,10 @@ public class CarController {
         return errorMessage;
     }
 
+    @Override
+    public void processValueChange(ValueChangeEvent event) throws AbortProcessingException {
+        owner = (Member) event.getNewValue();
+        System.out.println("event = " + event);
+        System.out.println("owner = " + owner);
+    }
 }

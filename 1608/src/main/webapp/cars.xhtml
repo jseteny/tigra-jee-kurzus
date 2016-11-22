@@ -18,6 +18,7 @@
                                    itemValue="#{m.id}"
                                    itemLabel="#{m.name}"
                     />
+                    <f:valueChangeListener type="hu.tigra.jee.controller.CarController"/>
                     <f:converter converterId="memberConverter" />
                 </h:selectOneMenu>
                 <h:message for="owner" errorClass="invalid" />
@@ -36,10 +37,10 @@
             </h:panelGrid>
 
             <p>
-                <h:panelGrid columns="2">
-                    <h:commandButton id="register"
-                        action="#{carController.register}"
-                        value="Register" styleClass="register" />
+                <h:panelGrid columns="3">
+                    <h:commandButton id="deleteMember"
+                                     action="#{carController.deleteMember}"
+                                     value="Delete" styleClass="register"/>
                     <h:messages styleClass="messages"
                         errorClass="invalid" infoClass="valid"
                         warnClass="warning" globalOnly="true" />

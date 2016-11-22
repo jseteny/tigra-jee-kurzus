@@ -42,4 +42,10 @@ public class MemberRegistration {
         em.persist(member);
         memberEventSrc.fire(member);
     }
+
+    public void delete(Member member) {
+        log.info("Deleting " + member.getName());
+        em.remove(em.contains(member) ? member : em.merge(member));
+        memberEventSrc.fire(member);
+    }
 }
