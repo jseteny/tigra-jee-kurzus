@@ -2,7 +2,6 @@
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/templates/default.xhtml">
@@ -30,15 +29,14 @@
         </script>
 
         <h2>Allocations</h2>
-        <p:dataTable id="cars" var="car" value="#{dtColumnsView.cars}" widgetVar="carsTable"
-                     filteredValue="#{dtColumnsView.filteredCars}">
-            <p:columns value="#{dtColumnsView.columns}" var="column" columnIndexVar="colIndex"
-                       sortBy="#{car[column.property]}" filterBy="#{car[column.property]}">
-                <f:facet name="header">
-                    <h:outputText value="#{column.header}"/>
-                </f:facet>
-                <h:outputText value="#{car[column.property]}"/>
-            </p:columns>
-        </p:dataTable>
+        <h:form>
+            <p:dataTable id="mineField" var="row" value="#{mineFieldModel.rows}" widgetVar="carsTable">
+                <p:columns value="#{mineFieldModel.columns}" var="column" columnIndexVar="colIndex">
+
+                    <!--TODO http://www.primefaces.org/showcase/ui/ajax/basic.xhtml-->
+                    <h:commandButton value="#{row.cell(column)}" update="mineField"/>
+                </p:columns>
+            </p:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>
