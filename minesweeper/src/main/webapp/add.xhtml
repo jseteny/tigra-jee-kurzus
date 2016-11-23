@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+        <h1>Allocation list</h1>
+
+        <h:form id="reg">
+            <h2>Allocation Registration</h2>
+            <p>Enforces annotation-based constraints defined on the
+                model class.</p>
+            <h:panelGrid columns="3" columnClasses="titleCell">
+                <h:outputLabel for="subject" value="Subject:"/>
+                <h:inputText id="subject" value="#{newAllocation.subject}"/>
+                <h:message for="subject" errorClass="invalid"/>
+
+                <h:outputLabel for="email" value="Email:"/>
+                <h:inputText id="email" value="#{newAllocation.email}"/>
+                <h:message for="email" errorClass="invalid"/>
+
+                <h:outputLabel for="when" value="When:"/>
+                <h:inputText id="when"
+                             a:placeholder="2016-10-13 00:00"
+                             value="#{newAllocation.when}">
+                    <f:converter converterId="myDateTimeConverter"/>
+                </h:inputText>
+                <h:message for="when" errorClass="invalid"/>
+            </h:panelGrid>
+
+            <p>
+                <h:panelGrid columns="2">
+                    <h:commandButton id="register"
+                                     action="#{allocationController.register}"
+                                     value="Register" styleClass="register"/>
+                    <h:messages styleClass="messages"
+                                errorClass="invalid" infoClass="valid"
+                                warnClass="warning" globalOnly="true"/>
+                </h:panelGrid>
+            </p>
+        </h:form>
+        <h2>Allocations</h2>
+        <h:panelGroup rendered="#{empty allocations}">
+            <em>No registered allocations.</em>
+        </h:panelGroup>
+        <h:dataTable var="_allocation" value="#{allocations}"
+                     rendered="#{not empty allocations}"
+                     styleClass="simpletablestyle">
+            <h:column>
+                <f:facet name="header">Id</f:facet>
+                #{_allocation.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Subject</f:facet>
+                #{_allocation.subject}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Email</f:facet>
+                #{_allocation.email}
+            </h:column>
+            <h:column>
+                <f:facet name="header">When</f:facet>
+                #{_allocation.when}
+            </h:column>
+            <h:column>
+                <f:facet name="header">REST URL</f:facet>
+                <a
+                        href="#{request.contextPath}/rest/allocations/#{_allocation.id}">/rest/allocations/#{_allocation.id}</a>
+            </h:column>
+            <f:facet name="footer">
+                REST URL for all allocations: <a
+                    href="#{request.contextPath}/rest/allocations">/rest/allocations</a>
+            </f:facet>
+        </h:dataTable>
+    </ui:define>
+</ui:composition>

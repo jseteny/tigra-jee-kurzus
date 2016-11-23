@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+        <h1>Allocation list</h1>
+
+        <h:form id="form">
+            <h:outputText id="out" styleClass="ui-widget display"/>
+
+            <p:commandButton value="Add" action="add?faces-redirect=true"/>
+        </h:form>
+
+        <p:socket onMessage="handleDate" channel="/date"/>
+        <script type="text/javascript">
+            function handleDate(data) {
+                $('.display').html(data);
+            }
+        </script>
+
+        <p:socket onMessage="handleReload" channel="/reload"/>
+        <script type="text/javascript">
+            function handleReload() {
+                location.reload();
+            }
+        </script>
+
+        <h2>Allocations</h2>
+        <p:dataTable id="cars" var="car" value="#{dtColumnsView.cars}" widgetVar="carsTable"
+                     filteredValue="#{dtColumnsView.filteredCars}">
+            <p:columns value="#{dtColumnsView.columns}" var="column" columnIndexVar="colIndex"
+                       sortBy="#{car[column.property]}" filterBy="#{car[column.property]}">
+                <f:facet name="header">
+                    <h:outputText value="#{column.header}"/>
+                </f:facet>
+                <h:outputText value="#{car[column.property]}"/>
+            </p:columns>
+        </p:dataTable>
+    </ui:define>
+</ui:composition>
