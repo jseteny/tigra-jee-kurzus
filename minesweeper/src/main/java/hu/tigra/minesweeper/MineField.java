@@ -3,6 +3,7 @@ package hu.tigra.minesweeper;
 
 public class MineField {
 
+    public static final int BOMB = -9;
     private int[][] field;
 
     private final int width;
@@ -16,7 +17,7 @@ public class MineField {
     }
 
     public void addBomb(int x, int y) {
-        field[y][x] = -9;
+        field[y][x] = BOMB;
         incrementNeighbours(x, y);
     }
 
@@ -24,7 +25,9 @@ public class MineField {
         for (int y = Math.max(0, by - 1); y <= Math.min(height - 1, by + 1); ++y) {
             for (int x = Math.max(0, bx - 1); x <= Math.min(width - 1, bx + 1); ++x) {
                 if (x != bx || y != by) {
-                    field[y][x] = field[y][x] + 1;
+                    if (field[y][x] != BOMB) {
+                        field[y][x] = field[y][x] + 1;
+                    }
                 }
             }
         }
