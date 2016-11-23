@@ -54,6 +54,15 @@ public class MineFieldTest {
         // TODO check more neighbours
     }
 
+    @Test
+    public void widthHeightOk() {
+        // Given
+        MineField mineField = new MineField(1, 2);
+
+        // When
+        mineField.addBomb(0, 1);
+    }
+
     private void assertAt(int x, int y, MineField mineField, int expected) {
         assertEquals("expected " + expected + " at " + x + "," + y, expected, mineField.at(x, y));
     }
