@@ -30,10 +30,15 @@ public class MineFieldTest {
         mineField.addBomb(1, 0);
 
         // Then
+        assertAt(0, 0, mineField, hasBomb());
+        assertAt(1, 0, mineField, hasBomb());
+
         assertAt(2, 0, mineField, has(1));
         assertAt(0, 1, mineField, has(2));
         assertAt(1, 1, mineField, has(2));
         assertAt(2, 1, mineField, has(1));
+
+        // TODO others are zero
     }
 
     @Test
@@ -51,7 +56,7 @@ public class MineFieldTest {
         assertAt(5, 2, mineField, has(2));
         assertAt(6, 2, mineField, has(1));
 
-        // TODO check more neighbours
+        // TODO check more neighbours and others are zero
     }
 
     @Test
@@ -69,5 +74,9 @@ public class MineFieldTest {
 
     private int has(int n) {
         return n;
+    }
+
+    private int hasBomb() {
+        return -9;
     }
 }
