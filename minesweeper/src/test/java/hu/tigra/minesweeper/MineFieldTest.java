@@ -15,9 +15,9 @@ public class MineFieldTest {
         mineField.addBomb(0, 0);
 
         // Then
-        assertEquals("1 at 1,0", 1, mineField.at(1, 0));
-        assertEquals("1 at 0,1", 1, mineField.at(0, 1));
-        assertEquals("1 at 1,1", 1, mineField.at(1, 1));
+        assertAt(1, 0, mineField, has(1));
+        assertAt(0, 1, mineField, has(1));
+        assertAt(1, 1, mineField, has(1));
     }
 
     @Test
@@ -30,10 +30,10 @@ public class MineFieldTest {
         mineField.addBomb(1, 0);
 
         // Then
-        assertEquals("1 at 2,0", 1, mineField.at(2, 0));
-        assertEquals("2 at 0,1", 2, mineField.at(0, 1));
-        assertEquals("2 at 1,1", 2, mineField.at(1, 1));
-        assertEquals("1 at 2,1", 1, mineField.at(2, 1));
+        assertAt(2, 0, mineField, has(1));
+        assertAt(0, 1, mineField, has(2));
+        assertAt(1, 1, mineField, has(2));
+        assertAt(2, 1, mineField, has(1));
     }
 
     @Test
@@ -46,11 +46,19 @@ public class MineFieldTest {
         mineField.addBomb(5, 3);
 
         // Then
-        assertEquals("1 at 3,2", 1, mineField.at(3, 2));
-        assertEquals("2 at 4,2", 2, mineField.at(4, 2));
-        assertEquals("2 at 5,2", 2, mineField.at(5, 2));
-        assertEquals("1 at 6,2", 1, mineField.at(6, 2));
+        assertAt(3, 2, mineField, has(1));
+        assertAt(4, 2, mineField, has(2));
+        assertAt(5, 2, mineField, has(2));
+        assertAt(6, 2, mineField, has(1));
 
         // TODO check more neighbours
+    }
+
+    private void assertAt(int x, int y, MineField mineField, int expected) {
+        assertEquals("expected " + expected + " at " + x + "," + y, expected, mineField.at(x, y));
+    }
+
+    private int has(int n) {
+        return n;
     }
 }
