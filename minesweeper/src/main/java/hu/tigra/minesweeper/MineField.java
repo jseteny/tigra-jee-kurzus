@@ -12,11 +12,11 @@ public class MineField {
     public MineField(int width, int height) {
         this.width = width;
         this.height = height;
-        field = new int[width][height];
+        field = new int[height][width];
     }
 
     public void addBomb(int x, int y) {
-        field[x][y] = -9;
+        field[y][x] = -9;
         incrementNeighbours(x, y);
     }
 
@@ -24,7 +24,7 @@ public class MineField {
         for (int y = Math.max(0, by - 1); y <= Math.min(height - 1, by + 1); ++y) {
             for (int x = Math.max(0, bx - 1); x <= Math.min(width - 1, bx + 1); ++x) {
                 if (x != bx || y != by) {
-                    field[x][y] = field[x][y] + 1;
+                    field[y][x] = field[y][x] + 1;
                 }
             }
         }
@@ -33,6 +33,14 @@ public class MineField {
     }
 
     public int at(int x, int y) {
-        return field[x][y];
+        return field[y][x];
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
