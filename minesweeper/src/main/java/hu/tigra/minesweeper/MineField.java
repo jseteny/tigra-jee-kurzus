@@ -21,13 +21,17 @@ public class MineField {
         incrementNeighbours(x, y);
     }
 
-    private void incrementNeighbours(int bx, int by) {
-        for (int y = Math.max(0, by - 1); y <= Math.min(height - 1, by + 1); ++y) {
-            for (int x = Math.max(0, bx - 1); x <= Math.min(width - 1, bx + 1); ++x) {
-                if (x != bx || y != by) {
-                    if (field[y][x] != BOMB) {
-                        field[y][x] = field[y][x] + 1;
-                    }
+    private void incrementNeighbours(int bombX, int bombY) {
+        int startY = Math.max(0, bombY - 1);
+        int endY = Math.min(height - 1, bombY + 1);
+
+        int startX = Math.max(0, bombX - 1);
+        int endX = Math.min(width - 1, bombX + 1);
+
+        for (int y = startY; y <= endY; ++y) {
+            for (int x = startX; x <= endX; ++x) {
+                if (field[y][x] != BOMB) {
+                    field[y][x] = field[y][x] + 1;
                 }
             }
         }
