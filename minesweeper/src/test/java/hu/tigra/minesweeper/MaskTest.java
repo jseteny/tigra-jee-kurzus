@@ -7,14 +7,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MaskTest {
 
+    private static final int B = MineField.BOMB;
+
     private MineField mineField;
 
     @Before
     public void setup() {
         int[][] field = {
-                {0, 0, 3, 4},
-                {0, 0, 3, 4},
-                {1, 2, 3, 4}
+                {0, 0, 1, 1},
+                {0, 0, 1, B},
+                {1, 2, 2, 2},
+                {B, 2, B, 1}
         };
         mineField = new MineField(field);
     }
@@ -25,11 +28,13 @@ public class MaskTest {
         int[][] previous = {
                 {1, 1, 1, 1},
                 {1, 1, 1, 1},
+                {1, 1, 1, 1},
                 {1, 1, 1, 1}
         };
         int[][] expected = {
                 {0, 0, 1, 1},
                 {0, 0, 1, 1},
+                {1, 1, 1, 1},
                 {1, 1, 1, 1}
         };
         int[][] actual = Mask.unmask(mineField, previous, 0, 0);
