@@ -4,8 +4,8 @@ package hu.tigra.minesweeper;
 public class MineField {
 
     public static final int BOMB = -9;
-    private int[][] field;
 
+    private final int[][] field;
     private final int width;
     private final int height;
 
@@ -14,6 +14,12 @@ public class MineField {
         this.width = width;
         this.height = height;
         field = new int[height][width];
+    }
+
+    public MineField(int[][] field) {
+        this.field = field;
+        width = field.length;
+        height = field[0].length;
     }
 
     public void addBomb(int x, int y) {
