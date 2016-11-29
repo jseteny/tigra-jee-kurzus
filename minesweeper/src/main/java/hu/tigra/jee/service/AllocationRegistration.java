@@ -20,13 +20,10 @@ import hu.tigra.jee.model.Allocation;
 import org.primefaces.push.EventBus;
 import org.primefaces.push.EventBusFactory;
 
-import javax.ejb.Schedule;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Logger;
 
 // The @Stateless annotation eliminates the need for manual transaction demarcation
@@ -51,13 +48,5 @@ public class AllocationRegistration {
         EventBus eventBus = EventBusFactory.getDefault().eventBus();
         eventBus.publish("/reload", 1234);
         System.out.println("eventBus.publish(\"/reload\")");
-    }
-
-    @Schedule(hour = "*", minute = "*", second = "*/10")
-    public void updateTime() {
-        EventBus eventBus = EventBusFactory.getDefault().eventBus();
-        Date date = Calendar.getInstance().getTime();
-        eventBus.publish("/date", date);
-        System.out.println("new Date() = " + date);
     }
 }

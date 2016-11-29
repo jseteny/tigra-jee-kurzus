@@ -34,7 +34,7 @@
                 <p:columns value="#{mineFieldModel.columns}" var="column" columnIndexVar="colIndex">
 
                     <!--TODO http://www.primefaces.org/showcase/ui/ajax/basic.xhtml-->
-                    <h:commandButton value="#{row.cell(column)}" update="mineField"/>
+                    <h:commandButton value="#{row.cell(column)}" action="#{mineFieldModel.click(column,row.index)}"/>
                 </p:columns>
             </p:dataTable>
         </h:form>
