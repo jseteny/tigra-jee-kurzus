@@ -42,7 +42,7 @@ public class MineField {
             }
         }
 
-        // TODO field = field.stream().map()
+        // A tdd-java8-stream branch-en található ugyanez a metódus funkcionális programozással
     }
 
     public int at(int x, int y) {
