@@ -1,5 +1,6 @@
 package hu.tigra.minesweeper;
 
+import hu.tigra.minesweeper.Mask.Explosion;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +25,7 @@ public class MaskTest {
     }
 
     @Test
-    public void unmaskAt_11() {
+    public void unmaskAt_11() throws Exception {
 
         int[][] previous = {
                 {1, 1, 1, 1, 1},
@@ -47,7 +48,7 @@ public class MaskTest {
     }
 
     @Test
-    public void unmaskAt_00() {
+    public void unmaskAt_00() throws Exception {
 
         int[][] previous = {
                 {1, 1, 1, 1, 1},
@@ -67,5 +68,18 @@ public class MaskTest {
         for (int r = 0; r < expected.length; r++) {
             assertThat(actual[r]).as("row " + r).containsExactly(expected[r]);
         }
+    }
+
+    @Test(expected = Explosion.class)
+    public void unmaskAt_41() throws Exception {
+
+        int[][] previous = {
+                {0, 0, 0, 1, 1},
+                {0, 0, 0, 1, 1},
+                {0, 0, 0, 1, 1},
+                {1, 1, 1, 1, 1},
+                {1, 1, 1, 1, 1}
+        };
+        Mask.unmask(mineField, previous, 4, 1);
     }
 }
