@@ -28,21 +28,19 @@ public class MineField {
     }
 
     private void incrementNeighbours(int bombX, int bombY) {
-        int startY = Math.max(0, bombY - 1);
-        int endY = Math.min(height - 1, bombY + 1);
-
         int startX = Math.max(0, bombX - 1);
         int endX = Math.min(width - 1, bombX + 1);
 
-        for (int y = startY; y <= endY; ++y) {
-            for (int x = startX; x <= endX; ++x) {
+        int startY = Math.max(0, bombY - 1);
+        int endY = Math.min(height - 1, bombY + 1);
+
+        for (int x = startX; x <= endX; ++x) {
+            for (int y = startY; y <= endY; ++y) {
                 if (field[y][x] != BOMB) {
                     field[y][x] = field[y][x] + 1;
                 }
             }
         }
-
-        // A tdd-java8-stream branch-en található ugyanez a metódus funkcionális programozással
     }
 
     public int at(int x, int y) {
