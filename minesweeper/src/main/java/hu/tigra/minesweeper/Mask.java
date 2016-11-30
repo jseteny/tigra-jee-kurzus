@@ -17,7 +17,7 @@ public class Mask {
         return unmaskCell(mineField, mask, newMask, clickX, clickY);
     }
 
-    private static int[][] unmaskCell(MineField mineField, int[][] mask, int[][] newMask, int x, int y) throws Explosion {
+    private static int[][] unmaskCell(MineField mineField, int[][] mask, int[][] newMask, int x, int y) {
         if (mineField.at(x, y) == 0 && newMask[y][x] == 1) {
             newMask[y][x] = 0;
             return unmaskNeighbours(mineField, mask, newMask, x, y);
@@ -31,7 +31,7 @@ public class Mask {
         }
     }
 
-    private static int[][] unmaskNeighbours(MineField mineField, int[][] mask, int[][] newMask, int cellX, int cellY) throws Explosion {
+    private static int[][] unmaskNeighbours(MineField mineField, int[][] mask, int[][] newMask, int cellX, int cellY) {
         int startY = Math.max(0, cellY - 1);
         int endY = Math.min(mineField.getHeight() - 1, cellY + 1);
 
