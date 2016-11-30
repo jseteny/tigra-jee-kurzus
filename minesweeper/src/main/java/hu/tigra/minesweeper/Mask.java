@@ -14,22 +14,33 @@ public class Mask {
         }
 
         int[][] newMask = deepCopy(mask);
-        return um(mineField, mask, newMask, clickX, clickY);
+        return unmaskCell(mineField, mask, newMask, clickX, clickY);
     }
 
-    private static int[][] um(MineField mineField, int[][] mask, int[][] newMask, int clickX, int clickY) {
-        int startY = Math.max(0, clickY - 1);
-        int endY = Math.min(mineField.getHeight() - 1, clickY + 1);
+    private static int[][] unmaskCell(MineField mineField, int[][] mask, int[][] newMask, int x, int y) throws Explosion {
+        if (mineField.at(x, y) == 0 && newMask[y][x] == 1) {
+            newMask[y][x] = 0;
+            return unmaskNeighbours(mineField, mask, newMask, x, y);
 
-        int startX = Math.max(0, clickX - 1);
-        int endX = Math.min(mineField.getWidth() - 1, clickX + 1);
+        } else if (mineField.at(x, y) != BOMB) {
+            newMask[y][x] = 0;
+            return newMask;
+
+        } else {
+            return newMask;
+        }
+    }
+
+    private static int[][] unmaskNeighbours(MineField mineField, int[][] mask, int[][] newMask, int cellX, int cellY) throws Explosion {
+        int startY = Math.max(0, cellY - 1);
+        int endY = Math.min(mineField.getHeight() - 1, cellY + 1);
+
+        int startX = Math.max(0, cellX - 1);
+        int endX = Math.min(mineField.getWidth() - 1, cellX + 1);
 
         for (int y = startY; y <= endY; ++y) {
             for (int x = startX; x <= endX; ++x) {
-                if (mineField.at(x, y) == 0 && newMask[y][x] == 1) {
-                    newMask[y][x] = 0;
-                    um(mineField, mask, newMask, x, y);
-                }
+                unmaskCell(mineField, mask, newMask, x, y);
             }
         }
         return newMask;

@@ -35,10 +35,10 @@ public class MaskTest {
                 {1, 1, 1, 1, 1}
         };
         int[][] expected = {
-                {0, 0, 0, 1, 1},
-                {0, 0, 0, 1, 1},
-                {0, 0, 0, 1, 1},
-                {1, 1, 1, 1, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1},
                 {1, 1, 1, 1, 1}
         };
         int[][] actual = Mask.unmask(mineField, previous, 1, 1);
@@ -58,13 +58,36 @@ public class MaskTest {
                 {1, 1, 1, 1, 1}
         };
         int[][] expected = {
-                {0, 0, 0, 1, 1},
-                {0, 0, 0, 1, 1},
-                {0, 0, 0, 1, 1},
-                {1, 1, 1, 1, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1},
                 {1, 1, 1, 1, 1}
         };
         int[][] actual = Mask.unmask(mineField, previous, 0, 0);
+        for (int r = 0; r < expected.length; r++) {
+            assertThat(actual[r]).as("row " + r).containsExactly(expected[r]);
+        }
+    }
+
+    @Test
+    public void unmaskAt_30() throws Exception {
+
+        int[][] previous = {
+                {1, 1, 1, 1, 1},
+                {1, 1, 1, 1, 1},
+                {1, 1, 1, 1, 1},
+                {1, 1, 1, 1, 1},
+                {1, 1, 1, 1, 1}
+        };
+        int[][] expected = {
+                {1, 1, 1, 0, 1},
+                {1, 1, 1, 1, 1},
+                {1, 1, 1, 1, 1},
+                {1, 1, 1, 1, 1},
+                {1, 1, 1, 1, 1}
+        };
+        int[][] actual = Mask.unmask(mineField, previous, 3, 0);
         for (int r = 0; r < expected.length; r++) {
             assertThat(actual[r]).as("row " + r).containsExactly(expected[r]);
         }
@@ -74,10 +97,10 @@ public class MaskTest {
     public void unmaskAt_41() throws Exception {
 
         int[][] previous = {
-                {0, 0, 0, 1, 1},
-                {0, 0, 0, 1, 1},
-                {0, 0, 0, 1, 1},
-                {1, 1, 1, 1, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1},
                 {1, 1, 1, 1, 1}
         };
         Mask.unmask(mineField, previous, 4, 1);
