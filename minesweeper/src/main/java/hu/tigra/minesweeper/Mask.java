@@ -10,7 +10,7 @@ public class Mask {
 
     public static int[][] unmask(MineField mineField, int[][] mask, int clickX, int clickY) throws Explosion {
         if (mineField.at(clickX, clickY) == BOMB) {
-
+            throw new Explosion();
         }
 
         int[][] newMask = deepCopy(mask);
@@ -18,11 +18,11 @@ public class Mask {
     }
 
     private static int[][] unmaskCell(MineField mineField, int[][] mask, int[][] newMask, int x, int y) {
-        if () {
+        if (mineField.at(x, y) == 0 && newMask[y][x] == 1) {
             newMask[y][x] = 0;
             return unmaskNeighbours(mineField, mask, newMask, x, y);
 
-        } else if () {
+        } else if (mineField.at(x, y) != BOMB) {
             newMask[y][x] = 0;
             return newMask;
 
@@ -32,16 +32,15 @@ public class Mask {
     }
 
     private static int[][] unmaskNeighbours(MineField mineField, int[][] mask, int[][] newMask, int cellX, int cellY) {
-        int startY =
-        int endY =
+        int startY = Math.max(0, cellY - 1);
+        int endY = Math.min(mineField.getHeight() - 1, cellY + 1);
 
-        int startX =
-        int endX =
+        int startX = Math.max(0, cellX - 1);
+        int endX = Math.min(mineField.getWidth() - 1, cellX + 1);
 
         for (int y = startY; y <= endY; ++y) {
             for (int x = startX; x <= endX; ++x) {
-
-
+                unmaskCell(mineField, mask, newMask, x, y);
             }
         }
         return newMask;
