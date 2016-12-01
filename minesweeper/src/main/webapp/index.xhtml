@@ -6,13 +6,6 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/templates/default.xhtml">
     <ui:define name="content">
-        <h1>Allocation list</h1>
-
-        <h:form id="form">
-            <h:outputText id="out" styleClass="ui-widget display"/>
-
-            <p:commandButton value="Add" action="add?faces-redirect=true"/>
-        </h:form>
 
         <p:socket onMessage="handleDate" channel="/date"/>
         <script type="text/javascript">
@@ -28,8 +21,9 @@
             }
         </script>
 
-        <h2>Allocations</h2>
+        <h2>Aknakereső</h2>
         <h:form>
+            <h:commandButton value="Restart" action="#{mineFieldModel.restart}"/>
             <p:dataTable id="mineField" var="row" value="#{mineFieldModel.rows}" widgetVar="carsTable">
                 <p:columns value="#{mineFieldModel.columns}" var="column" columnIndexVar="colIndex">
 

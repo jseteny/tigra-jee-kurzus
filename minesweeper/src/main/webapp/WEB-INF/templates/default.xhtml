@@ -19,7 +19,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
 >
 <h:head>
     <title>1608</title>
@@ -28,12 +27,6 @@
 </h:head>
 <h:body>
     <div id="container">
-        <p:menubar>
-            <p:menuitem value="Fönti tárgyaló" url="/?room=fonti.targyalo"/>
-            <p:menuitem value="Lenti tárgyaló" url="/?room=lenti.targyalo"/>
-            <p:menuitem disabled="true" url=""><p:spacer width="480" height="10"/></p:menuitem>
-            <p:menuitem disabled="true" url=""><p:clock pattern="yyyy.MM.dd. HH:mm"/></p:menuitem>
-        </p:menubar>
 
         <div id="content">
             <ui:insert name="content">

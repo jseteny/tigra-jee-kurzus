@@ -4,15 +4,17 @@ import hu.tigra.minesweeper.Mask;
 import hu.tigra.minesweeper.Mask.Explosion;
 import hu.tigra.minesweeper.MineField;
 
-import javax.enterprise.inject.Model;
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 
-@Model
-public class MineFieldModel {
+@Named
+@javax.enterprise.context.SessionScoped
+public class MineFieldModel implements Serializable {
 
     private MineField mineField;
     private int[][] mask;
@@ -20,8 +22,12 @@ public class MineFieldModel {
     private List<Integer> collumns;
     private List<MineFieldRow> rows;
 
-    @SuppressWarnings("UnnecessaryLocalVariable")
     public MineFieldModel() {
+        init();
+    }
+
+    @SuppressWarnings("UnnecessaryLocalVariable")
+    private void init() {
         mineField = new MineField(8, 5);
         mineField.addBomb(4, 3);
         mineField.addBomb(5, 3);
@@ -49,6 +55,10 @@ public class MineFieldModel {
         }
     }
 
+    public void restart() {
+        init();
+    }
+
     public List<Integer> getColumns() {
         return collumns;
     }
@@ -58,6 +68,7 @@ public class MineFieldModel {
     }
 
 
+    @SuppressWarnings("WeakerAccess")
     public class MineFieldRow {
 
         private int r;
