@@ -61,6 +61,8 @@ public class MineFieldModel implements Serializable {
 
     public void restart() {
         init();
+        EventBus eventBus = EventBusFactory.getDefault().eventBus();
+        eventBus.publish("/reload", 1234);
     }
 
     public List<Integer> getColumns() {
