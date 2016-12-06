@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 
 @Named
-@javax.enterprise.context.SessionScoped
+@javax.enterprise.context.ApplicationScoped
 public class MineFieldModel implements Serializable {
 
     private MineField mineField;
