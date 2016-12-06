@@ -3,6 +3,8 @@ package hu.tigra.jee.model;
 import hu.tigra.minesweeper.Mask;
 import hu.tigra.minesweeper.Mask.Explosion;
 import hu.tigra.minesweeper.MineField;
+import org.primefaces.push.EventBus;
+import org.primefaces.push.EventBusFactory;
 
 import javax.inject.Named;
 import java.io.Serializable;
@@ -50,6 +52,8 @@ public class MineFieldModel implements Serializable {
     public void click(int x, int y) {
         try {
             mask = Mask.unmask(mineField, mask, x, y);
+            EventBus eventBus = EventBusFactory.getDefault().eventBus();
+            eventBus.publish("/reload", 1234);
         } catch (Explosion explosion) {
             // TODO
         }
