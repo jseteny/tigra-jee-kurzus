@@ -25,6 +25,7 @@
     <packaging>war</packaging>
     <name>Minesweeper</name>
 
+
     <url>http://wildfly.org</url>
     <licenses>
         <license>
