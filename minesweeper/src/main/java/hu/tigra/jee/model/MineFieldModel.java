@@ -6,6 +6,7 @@ import hu.tigra.minesweeper.MineField;
 import org.primefaces.push.EventBus;
 import org.primefaces.push.EventBusFactory;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -19,10 +20,14 @@ import java.util.stream.Stream;
 @javax.enterprise.context.ApplicationScoped
 public class MineFieldModel implements Serializable {
 
+    @Inject
+    private ExplodeCount explodeCount;
+
+
     private MineField mineField;
     private Integer[][] mask;
 
-    private List<Integer> collumns;
+    private List<Integer> columns;
     private List<MineFieldRow> rows;
 
     public MineFieldModel() {
@@ -36,14 +41,14 @@ public class MineFieldModel implements Serializable {
 
         initMask();
 
-        collumns = IntStream.range(0, mineField.getWidth()).boxed().collect(Collectors.toList());
+        columns = IntStream.range(0, mineField.getWidth()).boxed().collect(Collectors.toList());
 
         final int[] rowCount = {0};
         rows = Stream.generate(() -> new MineFieldRow(rowCount[0]++)).limit(mineField.getHeight()).collect(Collectors.toList());
     }
 
     private void initMineField() {
-        int bombCount = 8;
+        int bombCount = 18;
         mineField = new MineField(12, 5);
 
         int c = 0;
@@ -68,14 +73,13 @@ public class MineFieldModel implements Serializable {
     }
 
     public void click(int x, int y) {
+        EventBus eventBus = EventBusFactory.getDefault().eventBus();
         try {
             mask = Mask.unmask(mineField, mask, x, y);
-            EventBus eventBus = EventBusFactory.getDefault().eventBus();
             eventBus.publish("/reload", 1234);
         } catch (Explosion explosion) {
-            // TODO
+            explodeCount.increment();
             mask[y][x] = 0;
-            EventBus eventBus = EventBusFactory.getDefault().eventBus();
             eventBus.publish("/reload", 1234);
         }
     }
@@ -87,7 +91,7 @@ public class MineFieldModel implements Serializable {
     }
 
     public List<Integer> getColumns() {
-        return collumns;
+        return columns;
     }
 
     public List<MineFieldRow> getRows() {

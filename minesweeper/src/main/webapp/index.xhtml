@@ -3,7 +3,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/WEB-INF/templates/default.xhtml">
     <ui:define name="content">
 
@@ -17,9 +17,18 @@
 
         <h2>Aknakereső</h2>
         <h:form>
-            <h:commandButton value="Újra" action="#{mineFieldModel.restart}"/>
+            <p:toolbar>
+                <f:facet name="left">
+                    <h:commandButton value="Újra" action="#{mineFieldModel.restart}"/>
+                </f:facet>
+
+                <f:facet name="right">
+                    <h:outputLabel value="#{explodeCount.count}"/>
+                </f:facet>
+            </p:toolbar>
+
             <p:dataTable id="mineField" var="row" value="#{mineFieldModel.rows}">
-                <p:columns value="#{mineFieldModel.columns}" var="column" columnIndexVar="colIndex">
+                <p:columns var="column" value="#{mineFieldModel.columns}">
 
                     <h:commandButton value="#{row.cell(column)}" action="#{mineFieldModel.click(column,row.index)}"/>
 
