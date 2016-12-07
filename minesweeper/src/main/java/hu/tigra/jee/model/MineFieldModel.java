@@ -9,6 +9,7 @@ import org.primefaces.push.EventBusFactory;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -19,7 +20,7 @@ import java.util.stream.Stream;
 public class MineFieldModel implements Serializable {
 
     private MineField mineField;
-    private int[][] mask;
+    private Integer[][] mask;
 
     private List<Integer> collumns;
     private List<MineFieldRow> rows;
@@ -30,23 +31,40 @@ public class MineFieldModel implements Serializable {
 
     @SuppressWarnings("UnnecessaryLocalVariable")
     private void init() {
-        mineField = new MineField(8, 5);
-        mineField.addBomb(4, 3);
-        mineField.addBomb(5, 3);
 
-        int[][] m = {
-                {1, 1, 1, 1, 1, 1, 1, 1},
-                {1, 1, 1, 1, 1, 1, 1, 1},
-                {1, 1, 1, 1, 1, 1, 1, 1},
-                {1, 1, 1, 1, 1, 1, 1, 1},
-                {1, 1, 1, 1, 1, 1, 1, 1}
-        };
-        mask = m;
+        initMineField();
 
-        collumns = IntStream.range(0, mineField.getWidth() - 1).boxed().collect(Collectors.toList());
+        initMask();
+
+        collumns = IntStream.range(0, mineField.getWidth()).boxed().collect(Collectors.toList());
 
         final int[] rowCount = {0};
         rows = Stream.generate(() -> new MineFieldRow(rowCount[0]++)).limit(mineField.getHeight()).collect(Collectors.toList());
+    }
+
+    private void initMineField() {
+        int bombCount = 8;
+        mineField = new MineField(12, 5);
+
+        int c = 0;
+        Random rand = new Random();
+        while (c < bombCount) {
+            int x = rand.nextInt(mineField.getWidth());
+            int y = rand.nextInt(mineField.getHeight());
+
+            if (mineField.addBomb(x, y))
+                ++c;
+        }
+    }
+
+    private void initMask() {
+        mask = IntStream.range(0, mineField.getHeight()).mapToObj(y ->
+                IntStream.range(0, mineField.getWidth()).mapToObj(x ->
+
+                        1
+
+                ).toArray(size -> new Integer[mineField.getWidth()]))
+                .toArray(size -> new Integer[mineField.getHeight()][mineField.getWidth()]);
     }
 
     public void click(int x, int y) {
@@ -56,6 +74,9 @@ public class MineFieldModel implements Serializable {
             eventBus.publish("/reload", 1234);
         } catch (Explosion explosion) {
             // TODO
+            mask[y][x] = 0;
+            EventBus eventBus = EventBusFactory.getDefault().eventBus();
+            eventBus.publish("/reload", 1234);
         }
     }
 

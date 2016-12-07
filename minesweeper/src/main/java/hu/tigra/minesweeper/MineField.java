@@ -3,7 +3,7 @@ package hu.tigra.minesweeper;
 
 public class MineField {
 
-    public static final int BOMB = -9;
+    static final int BOMB = -9;
 
     private final int[][] field;
     private final int width;
@@ -16,15 +16,20 @@ public class MineField {
         field = new int[height][width];
     }
 
-    public MineField(int[][] field) {
+    MineField(int[][] field) {
         this.field = field;
         width = field.length;
         height = field[0].length;
     }
 
-    public void addBomb(int x, int y) {
-        field[y][x] = BOMB;
-        incrementNeighbours(x, y);
+    public boolean addBomb(int x, int y) {
+        if (field[y][x] == BOMB) {
+            return false;
+        } else {
+            field[y][x] = BOMB;
+            incrementNeighbours(x, y);
+            return true;
+        }
     }
 
     private void incrementNeighbours(int bombX, int bombY) {

@@ -27,21 +27,21 @@ public class MaskTest {
     @Test
     public void unmaskAt_11() throws Exception {
 
-        int[][] previous = {
+        Integer[][] previous = {
                 {1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1}
         };
-        int[][] expected = {
+        Integer[][] expected = {
                 {0, 0, 0, 0, 1},
                 {0, 0, 0, 0, 1},
                 {0, 0, 0, 0, 1},
                 {0, 0, 0, 0, 1},
                 {1, 1, 1, 1, 1}
         };
-        int[][] actual = Mask.unmask(mineField, previous, 1, 1);
+        Integer[][] actual = Mask.unmask(mineField, previous, 1, 1);
         for (int r = 0; r < expected.length; r++) {
             assertThat(actual[r]).as("row " + r).containsExactly(expected[r]);
         }
@@ -50,21 +50,21 @@ public class MaskTest {
     @Test
     public void unmaskAt_00() throws Exception {
 
-        int[][] previous = {
+        Integer[][] previous = {
                 {1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1}
         };
-        int[][] expected = {
+        Integer[][] expected = {
                 {0, 0, 0, 0, 1},
                 {0, 0, 0, 0, 1},
                 {0, 0, 0, 0, 1},
                 {0, 0, 0, 0, 1},
                 {1, 1, 1, 1, 1}
         };
-        int[][] actual = Mask.unmask(mineField, previous, 0, 0);
+        Integer[][] actual = Mask.unmask(mineField, previous, 0, 0);
         for (int r = 0; r < expected.length; r++) {
             assertThat(actual[r]).as("row " + r).containsExactly(expected[r]);
         }
@@ -73,21 +73,21 @@ public class MaskTest {
     @Test
     public void unmaskAt_30() throws Exception {
 
-        int[][] previous = {
+        Integer[][] previous = {
                 {1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1}
         };
-        int[][] expected = {
+        Integer[][] expected = {
                 {1, 1, 1, 0, 1},
                 {1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1}
         };
-        int[][] actual = Mask.unmask(mineField, previous, 3, 0);
+        Integer[][] actual = Mask.unmask(mineField, previous, 3, 0);
         for (int r = 0; r < expected.length; r++) {
             assertThat(actual[r]).as("row " + r).containsExactly(expected[r]);
         }
@@ -96,7 +96,7 @@ public class MaskTest {
     @Test(expected = Explosion.class)
     public void unmaskAt_41() throws Exception {
 
-        int[][] previous = {
+        Integer[][] previous = {
                 {0, 0, 0, 0, 1},
                 {0, 0, 0, 0, 1},
                 {0, 0, 0, 0, 1},

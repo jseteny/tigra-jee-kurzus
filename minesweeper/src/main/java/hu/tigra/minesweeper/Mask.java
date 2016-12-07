@@ -8,16 +8,16 @@ public class Mask {
     }
 
 
-    public static int[][] unmask(MineField mineField, int[][] mask, int clickX, int clickY) throws Explosion {
+    public static Integer[][] unmask(MineField mineField, Integer[][] mask, int clickX, int clickY) throws Explosion {
         if (mineField.at(clickX, clickY) == BOMB) {
             throw new Explosion();
         }
 
-        int[][] newMask = deepCopy(mask);
+        Integer[][] newMask = deepCopy(mask);
         return unmaskCell(mineField, mask, newMask, clickX, clickY);
     }
 
-    private static int[][] unmaskCell(MineField mineField, int[][] mask, int[][] newMask, int x, int y) {
+    private static Integer[][] unmaskCell(MineField mineField, Integer[][] mask, Integer[][] newMask, int x, int y) {
         if (mineField.at(x, y) == 0 && newMask[y][x] == 1) {
             newMask[y][x] = 0;
             return unmaskNeighbours(mineField, mask, newMask, x, y);
@@ -31,7 +31,7 @@ public class Mask {
         }
     }
 
-    private static int[][] unmaskNeighbours(MineField mineField, int[][] mask, int[][] newMask, int cellX, int cellY) {
+    private static Integer[][] unmaskNeighbours(MineField mineField, Integer[][] mask, Integer[][] newMask, int cellX, int cellY) {
         int startY = Math.max(0, cellY - 1);
         int endY = Math.min(mineField.getHeight() - 1, cellY + 1);
 
@@ -50,7 +50,7 @@ public class Mask {
      * http://stackoverflow.com/questions/1564832/how-do-i-do-a-deep-copy-of-a-2d-array-in-java
      */
     @SuppressWarnings("Convert2MethodRef")
-    private static int[][] deepCopy(int[][] matrix) {
+    private static Integer[][] deepCopy(Integer[][] matrix) {
         return java.util.Arrays.stream(matrix).map(el -> el.clone()).toArray($ -> matrix.clone());
     }
 }
